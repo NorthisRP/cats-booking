@@ -14,8 +14,9 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { catsStyles } from "./../style";
 
-export default function CatCard({ cat }) {
+export default function CatCard({ cat, bookCat, unbookCat }) {
   const classes = catsStyles();
+
   return (
     <Grid item>
       <Card raised className={classes.card}>
@@ -25,13 +26,21 @@ export default function CatCard({ cat }) {
           alt="some cat"
           height={250}
         />
-        <IconButton className={classes.iconBtn}>
-          {cat.isBooked ? (
+        {cat.isBooked ? (
+          <IconButton
+            className={classes.iconBtn}
+            onClick={() => unbookCat(cat.id)}
+          >
             <FavoriteIcon color="primary" />
-          ) : (
+          </IconButton>
+        ) : (
+          <IconButton
+            className={classes.iconBtn}
+            onClick={() => bookCat(cat.id)}
+          >
             <FavoriteBorderIcon color="primary" />
-          )}
-        </IconButton>
+          </IconButton>
+        )}
         <CardContent>
           <Typography variant="h5" style={{ marginBottom: 8 }}>
             <b>{cat?.nameCat} </b> ({cat?.breed?.nameBreed})

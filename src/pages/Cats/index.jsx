@@ -1,4 +1,4 @@
-import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { TabContext, TabList } from "@mui/lab";
 import { Box, Grid, Tab } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import catsService from "./../../services/cats.service";
@@ -27,6 +27,26 @@ export default function Cats() {
     setTab(value);
   };
 
+  const bookCat = (id) => {
+    catsService
+      .bookCat(id)
+      .then(() =>
+        setCats(
+          cats.map((cat) => (cat.id === id ? { ...cat, isBooked: true } : cat))
+        )
+      );
+  };
+
+  const unbookCat = (id) => {
+    catsService
+      .unbookCat(id)
+      .then(() =>
+        setCats(
+          cats.map((cat) => (cat.id === id ? { ...cat, isBooked: false } : cat))
+        )
+      );
+  };
+
   return (
     <TabContext value={tab}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -38,7 +58,12 @@ export default function Cats() {
       </Box>
       <Grid container spacing={2} style={{ padding: 24 }}>
         {cats.map((cat) => (
-          <CatCard cat={cat} key={cat.id} />
+          <CatCard
+            cat={cat}
+            key={cat.id}
+            bookCat={bookCat}
+            unbookCat={unbookCat}
+          />
         ))}
       </Grid>
     </TabContext>
