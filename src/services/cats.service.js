@@ -11,10 +11,6 @@ class CatsService {
     return this.instance.get(`/${id}`);
   }
 
-  getAllCats(page, limit) {
-    return this.instance.get(``, { params: { page, limit } });
-  }
-
   getBookedCats() {
     return this.instance.get(`/get/booked_cats`);
   }
