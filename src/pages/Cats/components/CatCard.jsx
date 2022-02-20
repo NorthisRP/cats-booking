@@ -24,7 +24,7 @@ export default function CatCard({ cat, bookCat, unbookCat }) {
           component="img"
           src={cat?.image ? cat.image : somecat}
           alt="some cat"
-          height={250}
+          height={200}
         />
         {cat.isBooked ? (
           <IconButton
@@ -42,7 +42,7 @@ export default function CatCard({ cat, bookCat, unbookCat }) {
           </IconButton>
         )}
         <CardContent>
-          <Typography variant="h5" style={{ marginBottom: 8 }}>
+          <Typography variant="h6" style={{ marginBottom: 8 }}>
             <b>{cat?.nameCat} </b> ({cat?.breed?.nameBreed})
           </Typography>
           <Stack direction="row" spacing={2}>
