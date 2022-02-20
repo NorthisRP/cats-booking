@@ -27,9 +27,9 @@ export default function CatCard({ cat }) {
         />
         <IconButton className={classes.iconBtn}>
           {cat.isBooked ? (
-            <FavoriteIcon color="secondary" />
+            <FavoriteIcon color="primary" />
           ) : (
-            <FavoriteBorderIcon color="secondary" />
+            <FavoriteBorderIcon color="primary" />
           )}
         </IconButton>
         <CardContent>
@@ -39,10 +39,10 @@ export default function CatCard({ cat }) {
           <Stack direction="row" spacing={2}>
             <Chip
               variant="outlined"
-              color="secondary"
+              color="primary"
               label={`${cat.age} years`}
             />
-            <Chip variant="outlined" color="secondary" label={cat.color} />
+            <Chip variant="outlined" color="primary" label={cat.color} />
           </Stack>
         </CardContent>
       </Card>
