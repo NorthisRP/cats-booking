@@ -56,7 +56,7 @@ export default function Cats() {
           <Tab label="Unbooked cats" value="unbooked" />
         </TabList>
       </Box>
-      <Grid container spacing={2} style={{ padding: 24 }}>
+      <Grid container spacing={4} style={{ padding: 24 }}>
         {cats.map((cat) => (
           <CatCard
             cat={cat}
