@@ -1,10 +1,15 @@
 import { axiosInstance } from "./axios.service";
+import { MOCCats } from "./mocData";
 
 class CatsService {
   instance = axiosInstance("cats");
 
+  constructor() {
+    this.instance.interceptors.response.use((response) => response.data);
+  }
+
   getAllCats(page, limit) {
-    return this.instance.get(``, { params: { page, limit } });
+    return new Promise((resolve, reject) => resolve(MOCCats)); //this.instance.get(``, { params: { page, limit } });
   }
 
   getOneCat(id) {

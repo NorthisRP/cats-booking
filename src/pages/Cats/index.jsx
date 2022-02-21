@@ -11,13 +11,11 @@ export default function Cats() {
   useEffect(() => {
     switch (tab) {
       case "all":
-        return catsService
-          .getAllCats(1, 20)
-          .then((res) => setCats(res.data.items));
+        return catsService.getAllCats(1, 20).then((res) => setCats(res.items));
       case "booked":
-        return catsService.getBookedCats().then((res) => setCats(res.data));
+        return catsService.getBookedCats().then((res) => setCats(res));
       case "unbooked":
-        return catsService.getNotBookedCats().then((res) => setCats(res.data));
+        return catsService.getNotBookedCats().then((res) => setCats(res));
       default:
         return;
     }
