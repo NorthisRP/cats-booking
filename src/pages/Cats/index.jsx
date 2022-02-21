@@ -3,10 +3,13 @@ import { Box, Grid, Tab } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import catsService from "./../../services/cats.service";
 import CatCard from "./components/CatCard";
+import DeleteDialog from "./components/DeleteDialog";
 
 export default function Cats() {
   const [cats, setCats] = useState([]);
   const [tab, setTab] = useState("all");
+  const [idCurrentCat, setIdCurrentCat] = useState();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     switch (tab) {
@@ -45,6 +48,15 @@ export default function Cats() {
       );
   };
 
+  const openDeleteDialog = (id) => {
+    setIdCurrentCat(id);
+    setOpen(true);
+  };
+
+  const deleteCardCat = (id) => {
+    setCats(cats.filter((cat) => cat.id !== id));
+  };
+
   return (
     <TabContext value={tab}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -61,9 +73,16 @@ export default function Cats() {
             key={cat.id}
             bookCat={bookCat}
             unbookCat={unbookCat}
+            openDeleteDialog={openDeleteDialog}
           />
         ))}
       </Grid>
+      <DeleteDialog
+        open={open}
+        setOpen={setOpen}
+        id={idCurrentCat}
+        deleteCardCat={deleteCardCat}
+      />
     </TabContext>
   );
 }

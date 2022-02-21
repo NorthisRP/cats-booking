@@ -12,9 +12,10 @@ import {
 import somecat from "../../../assets/somecat.png";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ClearIcon from "@mui/icons-material/Clear";
 import { catsStyles } from "./../style";
 
-export default function CatCard({ cat, bookCat, unbookCat }) {
+export default function CatCard({ cat, bookCat, unbookCat, openDeleteDialog }) {
   const classes = catsStyles();
 
   return (
@@ -26,6 +27,12 @@ export default function CatCard({ cat, bookCat, unbookCat }) {
           alt="some cat"
           height={200}
         />
+        <IconButton
+          className={classes.iconDlt}
+          onClick={() => openDeleteDialog(cat.id)}
+        >
+          <ClearIcon />
+        </IconButton>
         {cat.isBooked ? (
           <IconButton
             className={classes.iconBtn}
