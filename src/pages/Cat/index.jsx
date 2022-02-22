@@ -15,6 +15,7 @@ import somecat from "./../../assets/somecat.png";
 import { catStyles } from "./style";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
+import BookButton from "../../components/BookButton";
 
 export default function Cat() {
   const [cat, setCat] = useState({});
@@ -26,6 +27,10 @@ export default function Cat() {
     if (params?.catId)
       catsService.getOneCat(params.catId).then((res) => setCat(res));
   }, [params]);
+
+  const booking = () => {
+    setCat({ ...cat, isBooked: !cat.isBooked });
+  };
 
   return (
     <Card className={classes.card}>
@@ -48,14 +53,26 @@ export default function Cat() {
       </IconButton>
       <CardContent className={classes.infoContent}>
         <Paper className={classes.infoContentDetails}>
-          <Typography variant="h5">
-            <b>{cat?.nameCat} </b> ({cat?.breed?.nameBreed})
-          </Typography>
-          <Stack direction="row" spacing={2} style={{ margin: "12px 0" }}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography variant="h5">
+              <b>{cat?.nameCat} </b> ({cat?.breed?.nameBreed})
+            </Typography>
+            <BookButton cat={cat} changeBook={booking} />
+          </Stack>
+          <Stack
+            direction="row"
+            spacing={2}
+            style={{ margin: "12px 0" }}
+            justifyContent="flex-start"
+          >
             <Chip color="primary" label={`${cat.age} years`} />
             <Chip color="primary" label={cat.color} />
           </Stack>
-          <Typography variant="h5">{cat?.price} RUB / hour </Typography>
+          <Typography variant="h6">{cat?.price} RUB / hour </Typography>
         </Paper>
       </CardContent>
     </Card>
