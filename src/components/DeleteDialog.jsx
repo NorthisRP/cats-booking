@@ -9,13 +9,16 @@ import {
   Snackbar,
 } from "@mui/material";
 import React, { useState } from "react";
-import catsService from "./../../../services/cats.service";
+import { useDispatch } from "react-redux";
+import { deleteLocalCat } from "../store/catsReducer";
+import catsService from "./../services/cats.service";
 
-export default function DeleteDialog({ id, open, setOpen, deleteCardCat }) {
+export default function DeleteDialog({ id, open, setOpen }) {
   const [systemMessage, setSystemMessage] = useState({
     message: "",
-    severity: "",
+    severity: "success",
   });
+  const dispatch = useDispatch();
 
   const deleteCat = () => {
     catsService
@@ -26,7 +29,7 @@ export default function DeleteDialog({ id, open, setOpen, deleteCardCat }) {
           message: "Cat deleted successfully",
           severity: "success",
         });
-        deleteCardCat(id);
+        dispatch(deleteLocalCat(id));
       })
       .catch(() => {
         setOpen(false);

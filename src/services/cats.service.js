@@ -1,5 +1,5 @@
 import { axiosInstance } from "./axios.service";
-import { MOCCats } from "./mocData";
+// import { MOCCats } from "./mocData";
 
 class CatsService {
   instance = axiosInstance("cats");

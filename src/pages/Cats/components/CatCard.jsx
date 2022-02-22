@@ -14,12 +14,34 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ClearIcon from "@mui/icons-material/Clear";
 import { catsStyles } from "./../style";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeBook } from "./../../../store/catsReducer";
+import catsService from "./../../../services/cats.service";
 
-export default function CatCard({ cat, bookCat, unbookCat, openDeleteDialog }) {
+export default function CatCard({ cat, openDeleteDialog }) {
   const classes = catsStyles();
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+
+  const navigate = () => {
+    navigation(`/cats/${cat.id}`);
+  };
+
+  const bookCat = (id, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    catsService.bookCat(id).then(() => dispatch(changeBook(id)));
+  };
+
+  const unbookCat = (id, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    catsService.unbookCat(id).then(() => dispatch(changeBook(id)));
+  };
 
   return (
-    <Grid item>
+    <Grid item onClick={(e) => navigate(e)}>
       <Card raised className={classes.card}>
         <CardMedia
           component="img"
@@ -29,21 +51,21 @@ export default function CatCard({ cat, bookCat, unbookCat, openDeleteDialog }) {
         />
         <IconButton
           className={classes.iconDlt}
-          onClick={() => openDeleteDialog(cat.id)}
+          onClick={(e) => openDeleteDialog(cat.id, e)}
         >
           <ClearIcon />
         </IconButton>
         {cat.isBooked ? (
           <IconButton
             className={classes.iconBtn}
-            onClick={() => unbookCat(cat.id)}
+            onClick={(e) => unbookCat(cat.id, e)}
           >
             <FavoriteIcon color="primary" />
           </IconButton>
         ) : (
           <IconButton
             className={classes.iconBtn}
-            onClick={() => bookCat(cat.id)}
+            onClick={(e) => bookCat(cat.id, e)}
           >
             <FavoriteBorderIcon color="primary" />
           </IconButton>
