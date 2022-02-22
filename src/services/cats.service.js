@@ -9,7 +9,8 @@ class CatsService {
   }
 
   getAllCats(page, limit) {
-    return new Promise((resolve, reject) => resolve(MOCCats)); //this.instance.get(``, { params: { page, limit } });
+    return this.instance.get(``, { params: { page, limit } });
+    // return new Promise((resolve, reject) => resolve(MOCCats));
   }
 
   getOneCat(id) {

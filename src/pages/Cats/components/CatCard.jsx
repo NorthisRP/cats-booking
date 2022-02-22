@@ -23,7 +23,7 @@ export default function CatCard({ cat, bookCat, unbookCat, openDeleteDialog }) {
       <Card raised className={classes.card}>
         <CardMedia
           component="img"
-          src={cat?.image ? cat.image : somecat}
+          src={cat?.image?.url ? cat.image?.url : somecat}
           alt="some cat"
           height={200}
         />
