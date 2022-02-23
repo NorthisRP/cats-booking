@@ -15,12 +15,14 @@ export default function Cats() {
   const cats = useSelector((store) => store.cats);
 
   useEffect(() => {
+    //не стал делать пагинацию из-за странных запросов котов
+    //в одном page/size есть, в другом нет
     switch (tab) {
       case "all":
         return catsService
           .getAllCats(1, 20)
           .then((res) => dispatch(addCats(res.items)))
-          .catch(() => dispatch(addCats([])));
+          .catch(() => dispatch(addCats([]))); //бэк возвращает 404 ошибку если котов в бд нет ._.
       case "booked":
         return catsService
           .getBookedCats()

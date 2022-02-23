@@ -35,6 +35,7 @@ export default function Cat() {
   };
 
   const editCat = (data) => {
+    //почему-то нет в параметрах бэка возраста кота
     const { nameCat, price, color, nameBreed } = data;
     catsService
       .updateCat(cat.id, nameCat, price, color, nameBreed)
