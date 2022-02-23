@@ -4,11 +4,9 @@ export const globalStyles = makeStyles(() => ({
   header: {
     backgroundColor: "#1976d2",
     height: 60,
-    display: "flex",
+    display: "flex !important",
     paddingLeft: 45,
+    justifyContent: "space-between",
     alignItems: "center",
-  },
-  rightIcon: {
-    marginLeft: "auto",
   },
 }));

@@ -29,13 +29,13 @@ class CatsService {
     return this.instance.get(`/get/get_all_breeds`);
   }
 
-  createCat(name, price, color, nameBreed, age) {
+  createCat(nameCat, price, color, nameBreed, age) {
     return this.instance.post(`/create_cat`, {
-      name,
-      price,
+      nameCat,
+      price: +price,
       color,
       nameBreed,
-      age,
+      age: +age,
     });
   }
 
@@ -47,9 +47,9 @@ class CatsService {
     return this.instance.post(`/create_breed`, { nameBreed });
   }
 
-  updateCat(id, name, price, color, nameBreed) {
+  updateCat(id, nameCat, price, color, nameBreed) {
     return this.instance.put(`/update_cat/${id}`, {
-      name,
+      nameCat,
       price,
       color,
       nameBreed,
