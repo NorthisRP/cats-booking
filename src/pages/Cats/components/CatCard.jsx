@@ -51,7 +51,7 @@ export default function CatCard({ cat, openDeleteDialog }) {
         </Box>
         <CardContent>
           <Typography variant="h6" style={{ marginBottom: 8 }}>
-            <b>{cat?.nameCat} </b> ({cat?.breed?.nameBreed})
+            <b>{cat?.nameCat} </b> ({cat?.breed?.nameBreed || "N/A"})
           </Typography>
           <Stack direction="row" spacing={2}>
             <Chip
