@@ -16,11 +16,11 @@ export const catStyles = makeStyles(() => ({
     padding: 16,
   },
   iconBtn: {
-    position: "absolute",
+    position: "absolute !important",
     top: 16,
-    backgroundColor: "#1976d2",
+    backgroundColor: "#1976d2 !important",
     "&:hover": {
-      backgroundColor: "#4991da",
+      backgroundColor: "#4991da !important",
     },
   },
   leftIcon: {
