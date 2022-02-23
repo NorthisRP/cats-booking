@@ -28,19 +28,37 @@ export default function AddEditForm({ action, cat }) {
         <Controller
           name="nameCat"
           control={control}
-          render={({ field }) => <TextField label="Имя кота" {...field} />}
-          rules={{ required: "Please enter the name" }}
+          render={({ field, fieldState }) => (
+            <TextField label="Имя кота" {...field} error={fieldState.error} />
+          )}
+          rules={{
+            required: "Please enter the name",
+            minLength: 4,
+            maxLength: 12,
+          }}
         />
         <Controller
           name="price"
           control={control}
-          render={({ field }) => <TextField label="Цена в час" {...field} />}
+          render={({ field }) => (
+            <TextField
+              label="Цена в час"
+              {...field}
+              onChange={(e) => field.onChange(parseInt(e.target.value))}
+            />
+          )}
           rules={{ required: true }}
         />
         <Controller
           name="age"
           control={control}
-          render={({ field }) => <TextField label="Возраст" {...field} />}
+          render={({ field }) => (
+            <TextField
+              label="Возраст"
+              {...field}
+              onChange={(e) => field.onChange(parseInt(e.target.value))}
+            />
+          )}
           rules={{ required: true }}
         />
         <Controller
