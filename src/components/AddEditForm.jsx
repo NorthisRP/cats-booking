@@ -10,7 +10,11 @@ export default function AddEditForm({ action, cat }) {
     catsService.getAllBreeds().then((res) => setBreeds(res));
   }, []);
 
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       nameCat: cat?.name ? cat.name : "Борис",
       price: cat?.price ? cat.price : 100,
@@ -20,16 +24,23 @@ export default function AddEditForm({ action, cat }) {
     },
   });
   const onSubmit = (data) => {
+    if (Object.keys(errors).length) return;
     action(data);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack direction="column" spacing={2} style={{ margin: "12px 0" }}>
         <Controller
           name="nameCat"
           control={control}
-          render={({ field, fieldState }) => (
-            <TextField label="Имя кота" {...field} error={fieldState.error} />
+          render={({ field }) => (
+            <TextField
+              label="Имя кота"
+              {...field}
+              error={errors?.nameCat?.type}
+              helperText={errors?.nameCat?.type && "Incorrect name"}
+            />
           )}
           rules={{
             required: "Please enter the name",
@@ -44,10 +55,15 @@ export default function AddEditForm({ action, cat }) {
             <TextField
               label="Цена в час"
               {...field}
+              error={errors?.price?.type}
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+              helperText={
+                errors?.price?.type && "Котик не может стоить столько!!!"
+              }
               onChange={(e) => field.onChange(parseInt(e.target.value))}
             />
           )}
-          rules={{ required: true }}
+          rules={{ required: true, max: 5000, min: 100 }}
         />
         <Controller
           name="age"
@@ -56,10 +72,15 @@ export default function AddEditForm({ action, cat }) {
             <TextField
               label="Возраст"
               {...field}
+              error={errors?.age?.type}
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+              helperText={
+                errors?.age?.type && "Котику не может быть столько лет!"
+              }
               onChange={(e) => field.onChange(parseInt(e.target.value))}
             />
           )}
-          rules={{ required: true }}
+          rules={{ required: true, max: 30, min: 1 }}
         />
         <Controller
           name="color"
