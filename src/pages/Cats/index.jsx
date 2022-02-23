@@ -1,5 +1,5 @@
 import { TabContext, TabList } from "@mui/lab";
-import { Box, Grid, Tab } from "@mui/material";
+import { Box, Grid, Tab, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import catsService from "./../../services/cats.service";
 import CatCard from "./components/CatCard";
@@ -56,11 +56,21 @@ export default function Cats() {
           <Tab label="Unbooked cats" value="unbooked" />
         </TabList>
       </Box>
-      <Grid container spacing={4} style={{ padding: 24 }}>
-        {cats.map((cat) => (
-          <CatCard key={cat.id} cat={cat} openDeleteDialog={openDeleteDialog} />
-        ))}
-      </Grid>
+      {cats.length ? (
+        <Grid container spacing={4} style={{ padding: 24 }}>
+          {cats.map((cat) => (
+            <CatCard
+              key={cat.id}
+              cat={cat}
+              openDeleteDialog={openDeleteDialog}
+            />
+          ))}
+        </Grid>
+      ) : (
+        <Typography variant="h4" textAlign="center">
+          No cats
+        </Typography>
+      )}
       <DeleteDialog open={open} setOpen={setOpen} id={idCurrentCat} />
     </TabContext>
   );
