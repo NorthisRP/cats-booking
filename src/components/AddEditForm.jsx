@@ -38,7 +38,7 @@ export default function AddEditForm({ action, cat }) {
             <TextField
               label="Имя кота"
               {...field}
-              error={errors?.nameCat?.type}
+              error={!!errors?.nameCat?.type}
               helperText={errors?.nameCat?.type && "Incorrect name"}
             />
           )}
@@ -55,12 +55,11 @@ export default function AddEditForm({ action, cat }) {
             <TextField
               label="Цена в час"
               {...field}
-              error={errors?.price?.type}
+              error={!!errors?.price?.type}
               inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               helperText={
                 errors?.price?.type && "Котик не может стоить столько!!!"
               }
-              onChange={(e) => field.onChange(parseInt(e.target.value))}
             />
           )}
           rules={{ required: true, max: 5000, min: 100 }}
@@ -72,12 +71,11 @@ export default function AddEditForm({ action, cat }) {
             <TextField
               label="Возраст"
               {...field}
-              error={errors?.age?.type}
+              error={!!errors?.age?.type}
               inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               helperText={
                 errors?.age?.type && "Котику не может быть столько лет!"
               }
-              onChange={(e) => field.onChange(parseInt(e.target.value))}
             />
           )}
           rules={{ required: true, max: 30, min: 1 }}
