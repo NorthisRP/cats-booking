@@ -1,50 +1,17 @@
 import {
-  Alert,
   AppBar,
   Dialog,
   DialogContent,
   DialogContentText,
   IconButton,
-  Snackbar,
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch } from "react-redux";
 import AddEditForm from "./AddEditForm";
-import catsService from "../services/cats.service";
-import { addCat } from "./../store/catsReducer";
 
-export default function AddDialog({ open, setOpen }) {
-  const [systemMessage, setSystemMessage] = useState({
-    message: "",
-    severity: "success",
-  });
-
-  const dispatch = useDispatch();
-
-  const closeMessage = () => {
-    setSystemMessage({ message: "" });
-  };
-
-  const createCat = (data) => {
-    const { nameCat, price, color, nameBreed, age } = data;
-    catsService
-      .createCat(nameCat, price, color, nameBreed, age)
-      .then((res) => {
-        setSystemMessage({
-          message: "Cat added successfully",
-          severity: "success",
-        });
-        setOpen(false);
-        dispatch(addCat(res));
-      })
-      .catch(() =>
-        setSystemMessage({ message: "Something went wrong", severity: "error" })
-      );
-  };
-
+export default function AddDialog({ open, setOpen, action }) {
   return (
     <>
       <Dialog
@@ -69,22 +36,9 @@ export default function AddDialog({ open, setOpen }) {
         </AppBar>
         <DialogContent>
           <DialogContentText></DialogContentText>
-          <AddEditForm action={createCat} />
+          <AddEditForm action={action} />
         </DialogContent>
       </Dialog>
-      <Snackbar
-        open={!!systemMessage.message}
-        autoHideDuration={6000}
-        onClose={closeMessage}
-      >
-        <Alert
-          variant="filled"
-          onClose={closeMessage}
-          severity={systemMessage.severity}
-        >
-          {systemMessage.message}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

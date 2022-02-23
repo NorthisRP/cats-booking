@@ -16,9 +16,11 @@ import { catStyles } from "./style";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EditIcon from "@mui/icons-material/Edit";
 import BookButton from "../../components/BookButton";
+import AddDialog from "./../../components/AddDialog";
 
 export default function Cat() {
   const [cat, setCat] = useState({});
+  const [open, setOpen] = useState(false);
   const params = useParams();
   const classes = catStyles();
   const navigate = useNavigate();
@@ -32,7 +34,14 @@ export default function Cat() {
     setCat({ ...cat, isBooked: !cat.isBooked });
   };
 
-  return (
+  const editCat = (data) => {
+    const { nameCat, price, color, nameBreed } = data;
+    catsService
+      .updateCat(cat.id, nameCat, price, color, nameBreed)
+      .then((res) => setCat({ ...cat, ...res }));
+  };
+
+  return cat?.id ? (
     <Card className={classes.card}>
       <CardMedia
         component="img"
@@ -47,7 +56,7 @@ export default function Cat() {
       </IconButton>
       <IconButton
         className={`${classes.iconBtn} ${classes.rightIcon}`}
-        onClick={() => {}}
+        onClick={() => setOpen(true)}
       >
         <EditIcon htmlColor="white" />
       </IconButton>
@@ -75,6 +84,11 @@ export default function Cat() {
           <Typography variant="h6">{cat?.price} RUB / hour </Typography>
         </Paper>
       </CardContent>
+      <AddDialog open={open} setOpen={setOpen} action={editCat} />
     </Card>
+  ) : (
+    <Typography variant="h4" textAlign="center">
+      Loading cat...
+    </Typography>
   );
 }
