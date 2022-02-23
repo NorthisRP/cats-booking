@@ -15,7 +15,7 @@ export default function AddEditForm({ action, cat }) {
       nameCat: cat?.name ? cat.name : "Борис",
       price: cat?.price ? cat.price : 100,
       color: cat?.color ? cat.color : "Черный",
-      breed: cat?.breed.nameBreed ? cat.breed.nameBreed : "Френчи",
+      nameBreed: cat?.breed.nameBreed ? cat.breed.nameBreed : "Френчи",
       age: cat?.age ? cat.age : 1,
     },
   });
@@ -74,7 +74,7 @@ export default function AddEditForm({ action, cat }) {
         />
         {breeds.length && (
           <Controller
-            name="breed"
+            name="nameBreed"
             control={control}
             render={({ field }) => (
               <Select {...field}>
