@@ -11,7 +11,7 @@ import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import AddEditForm from "./AddEditForm";
 
-export default function AddDialog({ open, setOpen, action }) {
+export default function AddDialog({ open, setOpen, action, cat }) {
   return (
     <>
       <Dialog
@@ -36,7 +36,7 @@ export default function AddDialog({ open, setOpen, action }) {
         </AppBar>
         <DialogContent>
           <DialogContentText></DialogContentText>
-          <AddEditForm action={action} />
+          <AddEditForm action={action} cat={cat} />
         </DialogContent>
       </Dialog>
     </>

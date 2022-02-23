@@ -5,6 +5,7 @@ import catsService from "./../services/cats.service";
 
 export default function AddEditForm({ action, cat }) {
   const [breeds, setBreeds] = useState([]);
+  console.log(cat);
 
   useEffect(() => {
     catsService.getAllBreeds().then((res) => setBreeds(res));
@@ -16,7 +17,7 @@ export default function AddEditForm({ action, cat }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      nameCat: cat?.name ? cat.name : "Борис",
+      nameCat: cat?.nameCat ? cat.nameCat : "Борис",
       price: cat?.price ? cat.price : 100,
       color: cat?.color ? cat.color : "Черный",
       nameBreed: cat?.breed.nameBreed ? cat.breed.nameBreed : "Френчи",

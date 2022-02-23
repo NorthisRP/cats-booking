@@ -85,7 +85,7 @@ export default function Cat() {
           <Typography variant="h6">{cat?.price} RUB / hour </Typography>
         </Paper>
       </CardContent>
-      <AddDialog open={open} setOpen={setOpen} action={editCat} />
+      <AddDialog open={open} setOpen={setOpen} action={editCat} cat={cat} />
     </Card>
   ) : (
     <Typography variant="h4" textAlign="center">
